@@ -1,11 +1,11 @@
 trait Folder: Iterator {
-    fn foldl1<F>(mut self, f: F) -> Option<Self::Item>
+    fn foldl1<F>(self, f: F) -> Option<Self::Item>
         where
             F: FnMut(Self::Item, Self::Item) -> Self::Item;
 }
 
 impl<I> Folder for I where I: Iterator {
-    fn foldl1<F>(mut self, f: F) -> Option<Self::Item>
+    fn foldl1<F>(mut self, mut f: F) -> Option<Self::Item>
         where
             F: FnMut(Self::Item, Self::Item) -> Self::Item
     {
@@ -26,7 +26,7 @@ fn combine_all_optionf<T>(xs: &Vec<T>) -> Option<T>
     where
         T: Semigroup + Clone
 {
-    xs.iter().foldl1(|acc, next| acc.combine(next))
+    xs.clone().into_iter().foldl1(|acc, next| acc.combine(&next))
 }
 
 
