@@ -1,0 +1,7 @@
+[package]
+name = "learnrust"
+version = "0.1.0"
+authors = ["Alejandro Wainzinger <aikawarazuni@gmail.com>"]
+
+[dependencies]
+frunk = "0.1.32"
